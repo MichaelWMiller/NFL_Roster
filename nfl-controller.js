@@ -19,39 +19,55 @@ function Nflcontroller() {
             player.position = player.position ? player.position : 'Not listed'
             player.pro_team = player.pro_team ? player.pro_team : 'Not listed'
             template += `
-            <div class="player-card">
-                <img src="${player.photo}" alt="player card">
+            <div class="col s3 player-card" >
+                <img src="${player.photo}" style="width: 90px" alt="player card">
                 <h4>Name: <span id="playerName">${player.fullname}</span></h4>
                 <h5>Position: <span id="playerPosition">${player.position}</span></h5>
                 <h5>Team: <span id="playerTeam">${player.pro_team}</span></h5>
-                <button class=waves-effect waves-light btn" onclick="app.controllers.nflCtrl.addToMyTeam(${player.id}")</button>
+                <button class="button btn btn-primary" onclick="app.controllers.nflCtrl.addToMyTeam(${player.id})">Add to my Team</button>
             </div>
+            
             `
         }
         nflElem.innerHTML = template
     }
 
-    function drawMyTeam(arr) {}
+    function drawMyTeam(arr) {
+        var template = ``
+        var myTeamElem = document.getElementById("myTeam")
+        for (var i = 0; i < arr.length; i++) {
+            var player = arr[i]
+            player.fullname = player.fullname ? player.fullname : 'No Name'
+            player.position = player.position ? player.position : 'Not listed'
+            player.pro_team = player.pro_team ? player.pro_team : 'Not listed'
+            template += `
+            <div class="col s3 player-card" >
+            <img src="${player.photo}" style="width: 90px" alt="player card">
+            <h4>Name: <span id="playerName">${player.fullname}</span></h4>
+            <h5>Position: <span id="playerPosition">${player.position}</span></h5>
+            <h5>Team: <span id="playerTeam">${player.pro_team}</span></h5>
+            <button class="button btn btn-primary" onclick="app.controllers.nflCtrl.removeFromMyTeam(${player.id})">Remove From My Team</button>
+        </div>
+            `
+        }
+        myTeamElem.innerHTML = template
+    }
 
-    function getMyTeam() {}
+    this.getMyTeam = function() {
+        //return myTeam
+
+        drawMyTeam(myTeam)
+    }
 
     this.addToMyTeam = function addToMyTeam(id) {
-        nflService.addToTeam(id)
+        nflService.addToMyTeam(id)
+
         drawMyTeam(nflService.getMyTeam())
     }
 
-    this.removeFromTeam = function removeFromTeam(id) {}
-
-    function getPlayerByName(event) {
-
-    }
-
-    function getPlayerByPosition(event) {
-
-    }
-
-    function getPlayerByTeam(event) {
-
+    this.removeFromMyTeam = function removeFromMyTeam(id) {
+        var myTeamArr = nflService.removeFromTeam(id)
+        drawMyTeam(myTeamArr)
     }
 
     this.search = function search(event) {
@@ -75,7 +91,7 @@ function Nflcontroller() {
         }
         if (team) {
             searchValue = team
-            searchKey = "team"
+            searchKey = "pro_team"
         }
         var filteredArray = nflService.getPlayersBySearchParam(searchKey, searchValue)
 

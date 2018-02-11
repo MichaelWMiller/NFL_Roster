@@ -14,20 +14,86 @@
     <panel>
         <div class="container">
             <h1 class="h1-header">Fantasy Roster: MwM</h1>
-            <div class="row">
+            <div class="row" id="searchRow">
                 <form onsubmit="app.controllers.nflCtrl.search(event)">
                     <input type="text" placeholder="Name Search" name="name">
-                    <input type="text" placeholder="Position Search" name="position">
-                    <input type="text" placeholder="Team Search" name="team">
+                    <input list="positions" placeholder="Position Search" name="position">
+                    <datalist id="positions">
+                        <option value="QB">
+                        <option value="RB">
+                        <option value="FB">
+                        <option value="WR">
+                        <option value="TE">
+                        <option value="OL">
+                        <option value="C">
+                        <option value="G">
+                        <option value="LG">
+                        <option value="RG">
+                        <option value="T">
+                        <option value="LT">
+                        <option value="RT">
+                        <option value="K">
+                        <option value="KR">
+                        <option value="DL">
+                        <option value="DE">
+                        <option value="DT">
+                        <option value="NT">
+                        <option value="LB">
+                        <option value="ILB">
+                        <option value="OLB">
+                        <option value="MLB">
+                        <option value="DB">
+                        <option value="CB">
+                        <option value="FS">
+                        <option value="SS">
+                        <option value="S">
+                        <option value="P">
+                        <option value="PR">
+                    </datalist>
+                    <input list="teams" placeholder="Team Search" name="team">
+                    <datalist id="teams">
+                            <option value="ARI">
+                            <option value="ATL">
+                            <option value="BAL">
+                            <option value="BUF">
+                            <option value="CAR">
+                            <option value="CHI">
+                            <option value="CIN">
+                            <option value="CLE">
+                            <option value="DAL">
+                            <option value="DEN">
+                            <option value="DET">
+                            <option value="GB">
+                            <option value="HOU">
+                            <option value="IND">
+                            <option value="JAX">
+                            <option value="KC">
+                            <option value="LAC">
+                            <option value="LAR">
+                            <option value="MIA">
+                            <option value="MIN">
+                            <option value="NE">
+                            <option value="NO">
+                            <option value="NYG">
+                            <option value="NYJ">
+                            <option value="OAK">
+                            <option value="PHI">
+                            <option value="PIT">
+                            <option value="SEA">
+                            <option value="SF">
+                            <option value="TB">
+                        </datalist>
                     <button type="submit">Search Now</button>
                 </form>
+            </div>
+            <h2>My Team</h2>
+            <div class="row my-team" id="myTeam">
+
             </div>
             <h2>Players To Choose:</h2>
             <div class="row player-roster" id="playerRoster">
             </div>
-            <div class="row my-team" id="myTeam">
-                <h2>My Team</h2>
-            </div>
+
         </div>
     </panel>
 

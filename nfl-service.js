@@ -13,34 +13,6 @@ function NflService() {
         return filtered
     }
 
-
-    // this.getPlayersByTeam = function(teamName) {
-    //     return playersData.filter(function(player) {
-    //         if (player.team == teamName) {
-    //             return true;
-    //         }
-    //     });
-    // }
-
-    // this.getPlayersByPosition = function(position) {
-    //     //return an array of all players who match the given position.
-    //     return playersData.filter(function(player) {
-    //         if (player.position == position) {
-    //             return true;
-    //         }
-    //     });
-    // }
-
-    // this.getPlayersByName = function getPlayersByName(playerName) {
-    //     //return players by name
-    //     return playersData.filter(function(player) {
-    //         if (player.name == playerName) {
-    //             return true;
-    //         }
-    //     })
-    // }
-
-
     function loadPlayersData() {
 
         //Lets check the localstorage for the data before making the call.
@@ -50,7 +22,6 @@ function NflService() {
         var localData = localStorage.getItem('playersData');
         if (localData) {
             playersData = JSON.parse(localData);
-            console.log(playersData)
             return
             //return will short-circuit the loadPlayersData function
             //this will prevent the code below from ever executing
@@ -62,10 +33,10 @@ function NflService() {
 
         $.getJSON(apiUrl, function(data) {
             playersData = data.body.players;
-            console.log('Player Data Ready')
-            console.log('Writing Player Data to localStorage')
+            //console.log('Player Data Ready')
+            //console.log('Writing Player Data to localStorage')
             localStorage.setItem('playersData', JSON.stringify(playersData))
-            console.log('Finished Writing Player Data to localStorage')
+                //console.log('Finished Writing Player Data to localStorage')
 
         });
     }
@@ -81,16 +52,25 @@ function NflService() {
 
     //PUBLIC
     this.addToMyTeam = function addToTeam(id) {
-        var player = getCharactersById(nflPlayers, id)
-        if (!player || getCharacterById(myTeam, id) || myTeam.length > 13) { return }
+        var player = getPlayerById(playersData, id)
+        if (!player || getPlayerById(myTeam, id) || myTeam.length > 12) {
+            return
+        }
         myTeam.push(player)
+    }
+
+    this.getMyTeam = function getMyTeam() {
+        return myTeam
     }
 
     this.removeFromTeam = function(id) {
         var player = getPlayerById(myTeam, id)
-        if (!player) { return }
+        if (!player) {
+            return
+        }
         var i = myTeam.indexOf(player)
         myTeam.splice(i, 1)
+        return myTeam
     }
 
     loadPlayersData(); //call the function above every time we create a new service
