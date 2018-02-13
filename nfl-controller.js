@@ -83,7 +83,7 @@ function Nflcontroller() {
         var searchValue = ""
         if (name) {
             searchValue = name
-            searchKey = "name"
+            searchKey = "fullname"
         }
         if (position) {
             searchValue = position
@@ -98,15 +98,15 @@ function Nflcontroller() {
         drawNfl(filteredArray)
     }
 
-    function ready() {
-        loading = false; //stop the spinner
+    // function ready() {
+    //     loading = false; //stop the spinner
 
-        //Now that all of our player data is back we can safely setup our bindings for the rest of the view.
+    //     //Now that all of our player data is back we can safely setup our bindings for the rest of the view.
 
-        $('some-button').on('click', function() {
-            var teamSF = nflService.getPlayersByTeam("SF");
-        })
-    }
+    //     $('some-button').on('click', function() {
+    //         var teamSF = nflService.getPlayersByTeam("SF");
+    //     })
+    // }
 
     getPlayers()
 
